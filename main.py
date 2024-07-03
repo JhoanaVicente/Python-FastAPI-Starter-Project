@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.models.item import Item
+from app.routers import items
 
 app = FastAPI()
 
@@ -15,3 +16,7 @@ def create_item(item: Item):
 @app.get("/items/")
 def get_items():
     return items
+
+@app.get("/")
+async def read_root():
+    return {"message": "Welcome to my FastAPI application!"}
