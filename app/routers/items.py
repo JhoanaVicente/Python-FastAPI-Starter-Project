@@ -1,11 +1,16 @@
 from fastapi import APIRouter
+from app.models.item import Item
 
 router = APIRouter()
 
-@router.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
+items = []
 
 @router.post("/items/")
-def create_item(item: dict):
-    return item
+def create_item(item: Item):
+    items.append(item)
+    return {"message": "Item created", "item": item}
+
+@router.get("/items/")
+def get_items():
+    return items
+
